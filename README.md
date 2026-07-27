@@ -178,4 +178,12 @@ dict to switch:
 ## Citation
 
 If you use `hydromend` or the ERA5-GTSM operator library, please cite the
-accompanying paper and dataset (see `CITATION.cff`).
+accompanying paper and dataset:
+```
+@article{monahan2026learning,
+  title={Learning unresolved coastal dynamics in hydrodynamic models},
+  author={Monahan, Thomas Carey and Polton, Jeff and Innocenti, Silvia and Matte, Pascal and Ayyad, Mahmoud and Saman, Krijn and Adcock, Thomas AA},
+  year={2026},
+  publisher={EarthArXiv}
+}
+```
