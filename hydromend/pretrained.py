@@ -156,6 +156,20 @@ class Operator:
             )
         raise TypeError("data must be a pandas Series or DataFrame.")
 
+    # sklearn-style attributes so an Operator works anywhere a fitted regressor
+    # is expected (extract_*_weights, the spectral / QTF views, ...).
+    @property
+    def coef_(self):
+        return self.coef
+
+    @property
+    def intercept_(self):
+        return self.intercept
+
+    @property
+    def feature_names_in_(self):
+        return self.feature_names
+
     # -- serialisation -------------------------------------------------------
     def to_row(self) -> dict:
         """One flat dict row (metadata columns included) for a library table."""

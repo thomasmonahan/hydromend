@@ -74,6 +74,14 @@ surf = hm.extract_bilinear_lag_surface(reg, X.columns)
 hm.plot_bilinear_kernel_surface(surf)                 # bilinear kernel w(τ1,τ2)
 ```
 
+Or in the frequency domain — the admittance and the input-weighted quadratic
+transfer function:
+
+```python
+f, W = hm.weighted_quadratic_transfer(reg, model_series, X.columns)  # |H2|·|X(f1)||X(f2)|
+hm.plot_quadratic_transfer(f, W)                       # which frequency pairs interact
+```
+
 **Worked examples** ([`examples/`](examples/)):
 
 - [`quickstart.ipynb`](examples/quickstart.ipynb) — end-to-end on **real GESLA +
@@ -84,8 +92,8 @@ hm.plot_bilinear_kernel_surface(surf)                 # bilinear kernel w(τ1,τ
   predictors at once.
 - [`1-d_estuary.ipynb`](examples/1-d_estuary.ipynb) — recreate the paper's **1-D
   shallow-water mechanism figures**: a numba estuary solver generates baseline
-  vs target series, and `hydromend` learns the linear impulse response and the
-  bilinear Volterra kernel *K(τ₁,τ₂)* for each mechanism.
+  vs target series, and `hydromend` learns the linear impulse response, the
+  bilinear Volterra kernel *K(τ₁,τ₂)*, and the weighted QTF for each mechanism.
 
 ---
 
@@ -147,6 +155,7 @@ hm.summarise_results(results)          # mean improvement ratio by model/regress
 | `hydromend.models` | regressors — `vb_ard` (default), `ols`, `gam`, `gp_lag`, `gp_volterra` |
 | `hydromend.benchmark` | train/test splitting, single-case fit, multi-site benchmark |
 | `hydromend.weights` | extract & plot the learned linear / bilinear kernels |
+| `hydromend.spectral` | frequency-domain views: admittance *H(f)*, quadratic transfer *H₂(f₁,f₂)*, weighted QTF |
 | `hydromend.data` | load observation/model pairs from NetCDF into per-site frames |
 | `hydromend.plotting` | diagnostic time-series / residual / learning-curve plots |
 | `hydromend.priors` | GP priors that couple neighbouring lag weights |

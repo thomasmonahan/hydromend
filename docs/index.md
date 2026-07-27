@@ -72,6 +72,12 @@ and returns a tidy results table plus stored predictions.
 - `compare_lag_weight_models` / `compare_bilinear_surfaces` overlay several
   fitted cases.
 
+In the frequency domain (`hydromend.spectral`): `linear_admittance` gives the
+operator's *H(f)*, `quadratic_transfer_function` the quadratic transfer
+*H₂(f₁,f₂)*, and `weighted_quadratic_transfer` the input-weighted QTF
+`|H₂|·|X(f₁)||X(f₂)|` — plotted with `plot_admittance` / `plot_quadratic_transfer`.
+These accept a fitted regressor or a saved `Operator`.
+
 ## Saving, shipping, applying
 
 A fitted regressor becomes a portable `Operator`:

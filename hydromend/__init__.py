@@ -88,6 +88,18 @@ from .plotting import (
     plot_prediction_example,
 )
 
+# --- frequency-domain views -------------------------------------------------
+from .spectral import (
+    linear_admittance,
+    quadratic_transfer_function,
+    weighted_quadratic_transfer,
+    fir_frequency_response,
+    volterra_qtf,
+    amp_spectrum,
+    plot_admittance,
+    plot_quadratic_transfer,
+)
+
 # --- pretrained operators ---------------------------------------------------
 from .pretrained import Operator, OperatorLibrary
 
@@ -113,6 +125,10 @@ __all__ = [
     # plotting
     "plot_raw_timeseries", "plot_residual_kde", "plot_learning_curve",
     "plot_location_bars", "plot_prediction_example",
+    # spectral / QTF
+    "linear_admittance", "quadratic_transfer_function", "weighted_quadratic_transfer",
+    "fir_frequency_response", "volterra_qtf", "amp_spectrum",
+    "plot_admittance", "plot_quadratic_transfer",
     # pretrained
     "Operator", "OperatorLibrary",
 ]

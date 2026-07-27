@@ -47,6 +47,17 @@ ones also expose `.coef_sd_`.
 - `extract_bilinear_lag_surface(regressor, feature_names=None, *, base_pair=None)` → `w(τ₁,τ₂)` rows.
 - `plot_lag_weight_kernel`, `plot_weight_heatmap`, `plot_bilinear_kernel_surface`, `plot_top_bilinear_terms`, `compare_lag_weight_models`, `compare_bilinear_surfaces`.
 
+## Frequency-domain views — `hydromend.spectral`
+
+All accept a fitted regressor or an `Operator` (feature names inferred), and infer
+the lag spacing from the features (override with `dt_hours=`).
+
+- `linear_admittance(reg, feature_names=None, *, dt_hours=None, n_freq=512)` → `(freqs_cph, H)` — complex linear frequency response *H(f)*.
+- `quadratic_transfer_function(reg, feature_names=None, *, dt_hours=None, n_freq=128)` → `(freqs_cph, H2)` — complex quadratic transfer *H₂(f₁,f₂)* (2-D DFT of the Volterra kernel).
+- `weighted_quadratic_transfer(reg, input_series, feature_names=None, *, dt_hours=None, n_freq=128)` → `(freqs_cph, W)` — input-weighted QTF `W = |H₂(f₁,f₂)|·|X(f₁)||X(f₂)|`.
+- `plot_admittance(reg=..., | freqs=, H=, ax=None, fmax=0.35, tidal_lines=True)` and `plot_quadratic_transfer(freqs, M, *, ax=None, log=True, fmax=0.35, tidal_lines=True, cbar_label=...)`.
+- Primitives: `fir_frequency_response(weights, dt_hours, n_freq)`, `volterra_qtf(K, dt_hours, n_freq)`, `amp_spectrum(x, dt_hours)`.
+
 ## Diagnostic plots — `hydromend.plotting`
 
 - `plot_raw_timeseries`, `plot_residual_kde`, `plot_learning_curve`, `plot_location_bars`, `plot_prediction_example`.
