@@ -82,6 +82,10 @@ hm.plot_bilinear_kernel_surface(surf)                 # bilinear kernel w(τ1,τ
   models on synthetic data**: impose a known Volterra operator, recover it,
   compare linear vs bilinear, see the overtides in the spectrum, and use several
   predictors at once.
+- [`1-d_estuary.ipynb`](examples/1-d_estuary.ipynb) — recreate the paper's **1-D
+  shallow-water mechanism figures**: a numba estuary solver generates baseline
+  vs target series, and `hydromend` learns the linear impulse response and the
+  bilinear Volterra kernel *K(τ₁,τ₂)* for each mechanism.
 
 ---
 

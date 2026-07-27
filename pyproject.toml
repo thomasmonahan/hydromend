@@ -35,6 +35,8 @@ dependencies = [
 [project.optional-dependencies]
 # Additive-spline (GAM) regressor backend; everything else works without it.
 gam = ["statsmodels>=0.13"]
+# Extra deps to run the example notebooks (the 1-D estuary solver needs numba).
+examples = ["numba>=0.57", "jupyter"]
 dev = ["pytest>=7", "ruff>=0.1", "statsmodels>=0.13"]
 
 [project.urls]
