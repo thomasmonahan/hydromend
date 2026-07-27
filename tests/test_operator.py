@@ -71,6 +71,19 @@ def test_nearest_lookup(fitted):
     assert near.metadata["query_dist_km"] < 5.0
 
 
+def test_get_falls_back_to_file_key(fitted, tmp_path):
+    df, X, reg, op = fitted
+    # two operators sharing the same site name but distinct 'file' ids
+    r1 = op.to_row(); r1["site"] = "dup"; r1["file"] = "gauge_a.txt"
+    r2 = op.to_row(); r2["site"] = "dup"; r2["file"] = "gauge_b.txt"
+    lib = hm.OperatorLibrary(pd.DataFrame([r1, r2]))
+    # ambiguous by site -> must raise and point at the file ids
+    with pytest.raises(KeyError):
+        lib.get("dup")
+    # unique file id resolves it
+    assert lib.get("gauge_b.txt").metadata["file"] == "gauge_b.txt"
+
+
 def test_missing_predictor_raises(fitted):
     df, X, reg, op = fitted
     # A multi-column frame with no "model" column is ambiguous -> must raise.

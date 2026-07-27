@@ -251,11 +251,31 @@ class OperatorLibrary:
     def sites(self) -> list:
         return self.table["site"].tolist()
 
-    def get(self, site) -> Operator:
-        hit = self.table[self.table["site"] == site]
-        if hit.empty:
-            raise KeyError(site)
-        return Operator.from_row(hit.iloc[0])
+    def get(self, key) -> Operator:
+        """Look up an operator by ``site`` name, falling back to the unique
+        ``file`` id when a site name is ambiguous or not present.
+
+        Site names are not guaranteed unique across contributors, so if ``key``
+        matches several rows by ``site`` you must disambiguate with the ``file``
+        id (or use :meth:`nearest`).
+        """
+        if "site" in self.table.columns:
+            site_hit = self.table[self.table["site"] == key]
+            if len(site_hit) == 1:
+                return Operator.from_row(site_hit.iloc[0])
+        else:
+            site_hit = self.table.iloc[0:0]
+        if "file" in self.table.columns:
+            file_hit = self.table[self.table["file"] == key]
+            if len(file_hit) == 1:
+                return Operator.from_row(file_hit.iloc[0])
+        if len(site_hit) > 1:
+            examples = site_hit["file"].tolist()[:3] if "file" in self.table.columns else []
+            raise KeyError(
+                f"{key!r} matches {len(site_hit)} gauges by site; pass a unique 'file' id "
+                f"(e.g. {examples}) or use nearest()."
+            )
+        raise KeyError(key)
 
     def nearest(self, lat, lon, *, max_km=None) -> Operator:
         d = self._haversine_km(lat, lon, self.table["lat"].to_numpy(float),
