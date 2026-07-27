@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "hydromend: learnable lag operators for hydrodynamic model post-processing"
+message: "If you use this software, please cite it and the accompanying paper/dataset."
+type: software
+authors:
+  - family-names: Monahan
+    given-names: Thomas
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/thomasmonahan/hydromend"
+keywords:
+  - storm surge
+  - tide gauge
+  - GTSM
+  - GESLA
+  - Volterra kernel
+  - post-processing
