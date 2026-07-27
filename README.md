@@ -74,8 +74,14 @@ surf = hm.extract_bilinear_lag_surface(reg, X.columns)
 hm.plot_bilinear_kernel_surface(surf)                 # bilinear kernel w(τ1,τ2)
 ```
 
-See [`examples/quickstart.ipynb`](examples/quickstart.ipynb) for the full run on
-real GESLA + GTSM data (load the pair → fit → inspect → evaluate → save/reload).
+**Worked examples** ([`examples/`](examples/)):
+
+- [`quickstart.ipynb`](examples/quickstart.ipynb) — end-to-end on **real GESLA +
+  GTSM** data (load the pair → fit → inspect → evaluate → save/reload).
+- [`synthetic_volterra.ipynb`](examples/synthetic_volterra.ipynb) — **arbitrary
+  models on synthetic data**: impose a known Volterra operator, recover it,
+  compare linear vs bilinear, see the overtides in the spectrum, and use several
+  predictors at once.
 
 ---
 
